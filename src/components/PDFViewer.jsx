@@ -4,12 +4,11 @@ import pdfWorker from "pdfjs-dist/build/pdf.worker.min.mjs?url";
 import "react-pdf/dist/Page/TextLayer.css";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 
-// ✅ Use local worker file
 pdfjs.GlobalWorkerOptions.workerSrc = pdfWorker;
 
-const PDFViewer = ({ fileUrl }) => {
+export default function PDFViewer({ fileUrl }) {
   return (
-    <div className="mt-4">
+    <div className="relative flex justify-center">
       {fileUrl ? (
         <Document file={fileUrl}>
           <Page pageNumber={1} width={600} />
@@ -19,6 +18,4 @@ const PDFViewer = ({ fileUrl }) => {
       )}
     </div>
   );
-};
-
-export default PDFViewer;
+}

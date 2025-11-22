@@ -29,16 +29,23 @@ const UploadPDF = ({ onUploadSuccess }) => {
   return (
     <div
       {...getRootProps()}
-      className="border-2 border-dashed p-6 rounded-lg text-center cursor-pointer"
+      className={`w-full max-w-lg p-8 border-2 border-dashed rounded-2xl text-center transition-all cursor-pointer ${
+        isDragActive
+          ? "border-pink-400 bg-white/20"
+          : "border-white/30 hover:bg-white/10"
+      }`}
     >
       <input {...getInputProps()} />
-      {isDragActive ? (
-        <p>Drop the PDF here...</p>
+      {uploading ? (
+        <p className="text-white/80 animate-pulse">Uploading...</p>
+      ) : isDragActive ? (
+        <p className="text-pink-200 font-semibold">Drop it here...</p>
       ) : (
-        <p>Drag & drop a PDF here, or click to upload</p>
+        <p className="text-white/80">
+          Drag & drop your PDF here, or click to <span className="text-pink-300 font-semibold">browse</span>
+        </p>
       )}
-      {uploading && <p>Uploading...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p className="text-red-300 mt-2">{error}</p>}
     </div>
   );
 };
